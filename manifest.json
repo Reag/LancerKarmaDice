@@ -1,0 +1,35 @@
+{
+	"authors": [
+		"Reag"
+	],
+	"compatible_game_version": [
+		"1.4.2"
+	],
+	"dependencies": [],
+	"description": "",
+	"image": "thumbnail.png",
+	"incompatibilities": [],
+	"load_before": [],
+	"mod_meta": {
+		"date_added": 0,
+		"date_updated": 0,
+		"file_id": 0,
+		"game_version": "1.4.2",
+		"modio_id": 0,
+		"name_id": "",
+		"revision": 1,
+		"user_id": 0,
+		"username": ""
+	},
+	"name": "LancerKarmaDice",
+	"namespace": "Reag",
+	"optional_dependencies": [],
+	"requires_restart": true,
+	"summary": "Breaks up long streaks of bad rolls so that the RNG feels less RNG",
+	"tags": [
+		"Rules"
+	],
+	"title": "Karma Dice for Lancer",
+	"version_number": "0.0.1",
+	"website_url": ""
+}
