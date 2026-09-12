@@ -1,2 +1,3 @@
 id,en
 mod.reag_lancerkarmadice.name,LancerKarmaDice
+reag_karmic_dice.corrected.log,Karmic dice nudged {unit} from a {raw} to a {corrected}.
