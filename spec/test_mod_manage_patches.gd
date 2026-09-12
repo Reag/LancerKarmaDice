@@ -76,3 +76,65 @@ func test_config_values_differ_compares_values_and_nothing_else():
 	a.is_enabled = true
 	a.user_priority = 5
 	assert_false(script.config_values_differ(a, b), 'Enabled and priority are vanilla\'s comparison, not this one.')
+
+# ---------------------------------------------------------------- input order
+
+const PANEL_SCENE := 'res://ui/page/omninet/mod_manage/mod_config_panel.tscn'
+const EXPECTED_ORDER := ['enabled', 'players_only', 'outcome_aware', 'mixed_mode', 'reroll_mode', 'allow_crits', 'kick_in', 'low_roll_threshold', 'strength']
+
+func test_inputs_render_in_schema_order_whatever_the_file_order():
+	# Tools rewrite manifest.json with properties sorted alphabetically (and a stale copy can drop
+	# any field we add), so the order lives in reag_karma.gd DEFAULTS and mod_config_panel.gd_ext.gd
+	# sorts the rendered inputs by it.
+	var mod:ModCore = ModLibrary.get_installed_mod(&'Reag-LancerKarmaDice')
+	if mod == null: return fail_test('The mod is installed.')
+	# Reproduce what the editor does to the file: properties sorted alphabetically. Done on a COPY of
+	# the schema swapped in for the duration of the render, then restored.
+	var original_schema:Dictionary = mod.manifest.config_schema
+	var sorted_schema:Dictionary = original_schema.duplicate(true)
+	var sorted_props:Dictionary = {}
+	var names:Array = original_schema.properties.keys()
+	names.sort()
+	for n in names: sorted_props[n] = original_schema.properties[n]
+	sorted_schema.properties = sorted_props
+	assert_eq(names.front(), 'allow_crits', 'Sanity: the sorted copy really starts with allow_crits.')
+	mod.manifest.config_schema = sorted_schema
+	var panel:Node = load(PANEL_SCENE).instantiate()
+	add_child_autoqfree(panel)
+	# get_baseline, not get_current: with no campaign loaded, X.current_campaign() trips a typed-return
+	# engine error after earlier specs have populated the tree, and GUT counts engine errors as failures.
+	panel.rerender_config(mod, Modset.get_baseline().get_config(&'Reag-LancerKarmaDice'))
+	mod.manifest.config_schema = original_schema
+	var titles:Array[String] = []
+	for child in panel.get_node('%ConfigInputs').get_children():
+		if child is Control and child.visible and child.has_node('%Label'): titles.append(child.get_node('%Label').text)
+	var expected:Array[String] = []
+	for key in EXPECTED_ORDER: expected.append(tr('reag_karmic_dice.config.%s.title' % key))
+	assert_eq(titles, expected, 'Nine inputs, in the order the schema intends.')
+
+func test_reorder_is_stable_for_properties_without_order():
+	var props := {b = {title = 'B'}, a = {title = 'A', order = 1}, c = {title = 'C'}}
+	# Generic path (no code order): `order` fields first, the rest in file order.
+	var box := VBoxContainer.new()
+	add_child_autoqfree(box)
+	for t in ['B', 'A', 'C']:
+		var input:Node = load('res://ui/page/omninet/mod_manage/mod_config_input.tscn').instantiate()
+		box.add_child(input)
+		input.rerender({type = 'boolean', title = t}, false)
+	load('res://ui/page/omninet/mod_manage/mod_config_panel.gd').reorder_config_inputs(box, props)
+	var titles:Array[String] = []
+	for child in box.get_children(): titles.append(child.get_node('%Label').text)
+	assert_eq(titles, ['A', 'B', 'C'] as Array[String], 'Ordered first, then the rest in file order.')
+
+func test_code_order_beats_order_fields():
+	var props := {b = {title = 'B', order = 1}, a = {title = 'A', order = 2}, c = {title = 'C'}}
+	var box := VBoxContainer.new()
+	add_child_autoqfree(box)
+	for t in ['B', 'A', 'C']:
+		var input:Node = load('res://ui/page/omninet/mod_manage/mod_config_input.tscn').instantiate()
+		box.add_child(input)
+		input.rerender({type = 'boolean', title = t}, false)
+	load('res://ui/page/omninet/mod_manage/mod_config_panel.gd').reorder_config_inputs(box, props, ['c', 'a'])
+	var titles:Array[String] = []
+	for child in box.get_children(): titles.append(child.get_node('%Label').text)
+	assert_eq(titles, ['C', 'A', 'B'] as Array[String], 'Code order first (c, a), then the leftovers by their order field.')

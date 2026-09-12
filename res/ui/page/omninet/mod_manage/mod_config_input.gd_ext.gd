@@ -16,7 +16,12 @@
 # spec/test_mod_manage_patches.gd proves it is live by rendering through the real scene.
 extends "res://ui/page/omninet/mod_manage/mod_config_input.gd"
 
+## The schema property this input last rendered, so mod_config_panel.gd_ext.gd can match inputs
+## to properties without depending on label text or child order.
+var reag_property:Dictionary = {}
+
 func rerender(config:Dictionary, current_value = null) -> void:
+	reag_property = config
 	if current_value == null and config.has('default'):
 		current_value = config.default
 	super(config, current_value)

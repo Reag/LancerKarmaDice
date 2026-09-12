@@ -6,88 +6,88 @@
 		"1.4.2",
 		"1.4.3"
 	],
+	"config_schema": {
+		"description": "reag_karmic_dice.config.description",
+		"properties": {
+			"allow_crits": {
+				"default": false,
+				"description": "reag_karmic_dice.config.allow_crits.desc",
+				"title": "reag_karmic_dice.config.allow_crits.title",
+				"type": "boolean"
+			},
+			"enabled": {
+				"default": true,
+				"description": "reag_karmic_dice.config.enabled.desc",
+				"title": "reag_karmic_dice.config.enabled.title",
+				"type": "boolean"
+			},
+			"kick_in": {
+				"default": 2.0,
+				"description": "reag_karmic_dice.config.kick_in.desc",
+				"title": "reag_karmic_dice.config.kick_in.title",
+				"type": "number"
+			},
+			"low_roll_threshold": {
+				"default": 7.0,
+				"description": "reag_karmic_dice.config.low_roll_threshold.desc",
+				"title": "reag_karmic_dice.config.low_roll_threshold.title",
+				"type": "number"
+			},
+			"mixed_mode": {
+				"default": false,
+				"description": "reag_karmic_dice.config.mixed_mode.desc",
+				"title": "reag_karmic_dice.config.mixed_mode.title",
+				"type": "boolean"
+			},
+			"outcome_aware": {
+				"default": false,
+				"description": "reag_karmic_dice.config.outcome_aware.desc",
+				"title": "reag_karmic_dice.config.outcome_aware.title",
+				"type": "boolean"
+			},
+			"players_only": {
+				"default": true,
+				"description": "reag_karmic_dice.config.players_only.desc",
+				"title": "reag_karmic_dice.config.players_only.title",
+				"type": "boolean"
+			},
+			"reroll_mode": {
+				"default": false,
+				"description": "reag_karmic_dice.config.reroll_mode.desc",
+				"title": "reag_karmic_dice.config.reroll_mode.title",
+				"type": "boolean"
+			},
+			"strength": {
+				"default": 3.0,
+				"description": "reag_karmic_dice.config.strength.desc",
+				"title": "reag_karmic_dice.config.strength.title",
+				"type": "number"
+			}
+		},
+		"title": "reag_karmic_dice.config.title",
+		"type": "object"
+	},
 	"dependencies": [],
 	"description": "",
 	"image": "thumbnail.png",
 	"incompatibilities": [],
 	"load_before": [],
 	"mod_meta": {
-		"date_added": 0,
-		"date_updated": 0,
-		"file_id": 0,
-		"game_version": "1.4.2",
-		"modio_id": 0,
-		"name_id": "",
+		"date_added": 1789240800,
+		"date_updated": 1789240800,
+		"file_id": 8206491,
+		"game_version": "1.4.3",
+		"modio_id": 6378829,
+		"name_id": "dgco-reag",
 		"revision": 1,
-		"user_id": 0,
-		"username": ""
+		"user_id": 61561194,
+		"username": "Mr_Reag"
 	},
 	"name": "LancerKarmaDice",
 	"namespace": "Reag",
 	"optional_dependencies": [],
-	"config_schema": {
-		"title": "reag_karmic_dice.config.title",
-		"description": "reag_karmic_dice.config.description",
-		"type": "object",
-		"properties": {
-			"enabled": {
-				"type": "boolean",
-				"default": true,
-				"title": "reag_karmic_dice.config.enabled.title",
-				"description": "reag_karmic_dice.config.enabled.desc"
-			},
-			"players_only": {
-				"type": "boolean",
-				"default": true,
-				"title": "reag_karmic_dice.config.players_only.title",
-				"description": "reag_karmic_dice.config.players_only.desc"
-			},
-			"outcome_aware": {
-				"type": "boolean",
-				"default": false,
-				"title": "reag_karmic_dice.config.outcome_aware.title",
-				"description": "reag_karmic_dice.config.outcome_aware.desc"
-			},
-			"mixed_mode": {
-				"type": "boolean",
-				"default": false,
-				"title": "reag_karmic_dice.config.mixed_mode.title",
-				"description": "reag_karmic_dice.config.mixed_mode.desc"
-			},
-			"reroll_mode": {
-				"type": "boolean",
-				"default": false,
-				"title": "reag_karmic_dice.config.reroll_mode.title",
-				"description": "reag_karmic_dice.config.reroll_mode.desc"
-			},
-			"allow_crits": {
-				"type": "boolean",
-				"default": false,
-				"title": "reag_karmic_dice.config.allow_crits.title",
-				"description": "reag_karmic_dice.config.allow_crits.desc"
-			},
-			"kick_in": {
-				"type": "number",
-				"default": 2,
-				"title": "reag_karmic_dice.config.kick_in.title",
-				"description": "reag_karmic_dice.config.kick_in.desc"
-			},
-			"low_roll_threshold": {
-				"type": "number",
-				"default": 7,
-				"title": "reag_karmic_dice.config.low_roll_threshold.title",
-				"description": "reag_karmic_dice.config.low_roll_threshold.desc"
-			},
-			"strength": {
-				"type": "number",
-				"default": 3,
-				"title": "reag_karmic_dice.config.strength.title",
-				"description": "reag_karmic_dice.config.strength.desc"
-			}
-		}
-	},
 	"requires_restart": true,
-	"summary": "Breaks up long streaks of bad rolls so that the RNG feels less RNG",
+	"summary": "Breaks up streaks of bad rolls so that the RNG feels less RNG. Now with configuration options!",
 	"tags": [
 		"Rules"
 	],

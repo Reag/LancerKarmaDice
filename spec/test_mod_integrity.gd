@@ -40,7 +40,15 @@ func test_the_config_schema_has_every_key_with_a_default():
 	var props:Dictionary = manifest.config_schema.get('properties', {})
 	var expected := ['enabled', 'players_only', 'outcome_aware', 'mixed_mode', 'reroll_mode',
 		'allow_crits', 'kick_in', 'low_roll_threshold', 'strength']
-	assert_eq(props.keys(), expected, 'All nine keys, in panel order.')
+	var keys:Array = props.keys()
+	keys.sort()
+	var expected_sorted:Array = expected.duplicate()
+	expected_sorted.sort()
+	assert_eq(keys, expected_sorted, 'All nine keys. File order is not guaranteed (tools sort the manifest), so panel order comes from reag_karma.gd DEFAULTS via mod_config_panel.gd_ext.gd.')
+	var ReagKarma = load('res://unpacked/Reag-LancerKarmaDice/res/engine/utils/reag_karma.gd')
+	var defaults_order:Array = []
+	for k in ReagKarma.DEFAULTS.keys(): defaults_order.append(str(k))
+	assert_eq(defaults_order, expected, 'DEFAULTS is the panel order, and it is code, so nothing rewrites it.')
 	for key in expected:
 		if not props.has(key): continue
 		assert_true(props[key].has('default'), '%s has a default.' % key)
