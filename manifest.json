@@ -25,6 +25,67 @@
 	"name": "LancerKarmaDice",
 	"namespace": "Reag",
 	"optional_dependencies": [],
+	"config_schema": {
+		"title": "reag_karmic_dice.config.title",
+		"description": "reag_karmic_dice.config.description",
+		"type": "object",
+		"properties": {
+			"enabled": {
+				"type": "boolean",
+				"default": true,
+				"title": "reag_karmic_dice.config.enabled.title",
+				"description": "reag_karmic_dice.config.enabled.desc"
+			},
+			"players_only": {
+				"type": "boolean",
+				"default": true,
+				"title": "reag_karmic_dice.config.players_only.title",
+				"description": "reag_karmic_dice.config.players_only.desc"
+			},
+			"outcome_aware": {
+				"type": "boolean",
+				"default": false,
+				"title": "reag_karmic_dice.config.outcome_aware.title",
+				"description": "reag_karmic_dice.config.outcome_aware.desc"
+			},
+			"mixed_mode": {
+				"type": "boolean",
+				"default": false,
+				"title": "reag_karmic_dice.config.mixed_mode.title",
+				"description": "reag_karmic_dice.config.mixed_mode.desc"
+			},
+			"reroll_mode": {
+				"type": "boolean",
+				"default": false,
+				"title": "reag_karmic_dice.config.reroll_mode.title",
+				"description": "reag_karmic_dice.config.reroll_mode.desc"
+			},
+			"allow_crits": {
+				"type": "boolean",
+				"default": false,
+				"title": "reag_karmic_dice.config.allow_crits.title",
+				"description": "reag_karmic_dice.config.allow_crits.desc"
+			},
+			"kick_in": {
+				"type": "number",
+				"default": 2,
+				"title": "reag_karmic_dice.config.kick_in.title",
+				"description": "reag_karmic_dice.config.kick_in.desc"
+			},
+			"low_roll_threshold": {
+				"type": "number",
+				"default": 7,
+				"title": "reag_karmic_dice.config.low_roll_threshold.title",
+				"description": "reag_karmic_dice.config.low_roll_threshold.desc"
+			},
+			"strength": {
+				"type": "number",
+				"default": 3,
+				"title": "reag_karmic_dice.config.strength.title",
+				"description": "reag_karmic_dice.config.strength.desc"
+			}
+		}
+	},
 	"requires_restart": true,
 	"summary": "Breaks up long streaks of bad rolls so that the RNG feels less RNG",
 	"tags": [
