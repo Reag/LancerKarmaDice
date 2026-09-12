@@ -47,6 +47,13 @@ func test_a_property_without_a_default_still_renders_vanilla_style():
 	input.rerender({type = 'number', title = 'x'}, null)
 	assert_eq(int(input.get_node('%Number').value), 0, 'No default, no stored value: vanilla shows 0.')
 
+func test_a_title_that_is_a_translation_key_renders_as_its_text():
+	var input := make_input()
+	input.rerender({type = 'boolean', default = true, title = 'reag_karmic_dice.config.enabled.title', description = 'reag_karmic_dice.config.enabled.desc'}, null)
+	assert_eq(input.get_node('%Label').text, tr('reag_karmic_dice.config.enabled.title'), 'Title is the translated text, not the key.')
+	assert_eq(input.get_node('%Desc').text, tr('reag_karmic_dice.config.enabled.desc'), 'Description too.')
+	assert_ne(input.get_node('%Label').text, 'reag_karmic_dice.config.enabled.title', 'Sanity: the row exists, so the key did not leak through.')
+
 # ---------------------------------------------------------------- bug 2: Apply for value changes
 
 func test_the_mod_manage_script_carries_the_override():

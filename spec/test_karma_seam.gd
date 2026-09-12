@@ -118,6 +118,21 @@ func test_a_save_forced_on_the_player_is_corrected():
 	assert_eq(ReagKarma.calls, 1, 'The seam saw the save roll.')
 	assert_corrected_to(19, false) # no AttackRoll on a save
 
+func test_a_contested_check_attributes_each_roll_to_its_own_roller():
+	# unit_hasecheck.gd:10-12 - BOTH units roll on the ONE event, so nothing on the event can tell
+	# the two rolls apart; only the stash set by unit_hasecheck.gd_ext.gd (the roll_check override)
+	# can. This is the test that proves that extension is live: without it both rolls are attributed
+	# to the event's unit (the player), so nothing is declined; with it exactly the enemy's roll is.
+	arm(Faction.PLAYER)
+	ReagKarma.prime(game.map, {players_only = true, kick_in = 99})
+	var dummy_event := SpecFactory.dummy_event({unit = shooter})
+	dummy_event.block = EventBlock.create_multiple([dummy_event])
+	add_child_autoqfree(dummy_event.block)
+	await UnitHasecheck.make_contested_hull_check(dummy_event, shooter, target, null, [])
+	assert_eq(ReagKarma.calls, 2, 'Both units rolled through the seam.')
+	assert_eq(ReagKarma.declined, 1, 'Exactly one roll (the enemy\'s) was declined by players_only; 0 means both went to the player, 2 means both to the enemy.')
+	assert_null(ReagKarma.rolling_unit, 'The stash is cleared after each roll.')
+
 func test_disabled_is_vanilla():
 	arm(Faction.PLAYER)
 	ReagKarma.prime(game.map, {enabled = false, kick_in = 1, strength = 19})

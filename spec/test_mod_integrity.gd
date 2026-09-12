@@ -45,3 +45,20 @@ func test_the_config_schema_has_every_key_with_a_default():
 		if not props.has(key): continue
 		assert_true(props[key].has('default'), '%s has a default.' % key)
 		assert_true(props[key].has('title') and props[key].has('description'), '%s has title and description.' % key)
+
+func test_every_config_panel_string_is_a_localized_key():
+	# The panel text lives in localization/localizations.csv, not in the manifest, so it can be
+	# corrected or translated without touching the schema. The schema carries KEYS; Godot's automatic
+	# control translation (and mod_config_input.gd_ext.gd's explicit tr()) turns them into text.
+	# Same import caveat as the battle-log test above: a stale .translation makes this fail.
+	var manifest = ModLibrary.get_manifest(StringName(MOD_ID))
+	if manifest == null: return fail_test('Manifest present.')
+	var schema:Dictionary = manifest.config_schema
+	var keys:Array[String] = [schema.get('title', ''), schema.get('description', '')]
+	for prop in schema.get('properties', {}).values():
+		keys.append(prop.get('title', ''))
+		keys.append(prop.get('description', ''))
+	assert_eq(keys.size(), 20, 'Two panel strings plus nine keys times two.')
+	for key in keys:
+		assert_true(key.begins_with('reag_karmic_dice.config.'), '%s is a key, not English.' % key)
+		assert_ne(tr(key), key, '%s resolves to text.' % key)

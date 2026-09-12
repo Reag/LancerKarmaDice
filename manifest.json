@@ -1,21 +1,16 @@
 {
-	"name": "LancerKarmaDice",
-	"namespace": "Reag",
-	"version_number": "0.0.1",
-	"compatible_game_version": [
-		"1.4.2"
-	],
 	"authors": [
 		"Reag"
 	],
-	"image": "thumbnail.png",
-	"title": "Karma Dice for Lancer",
-	"summary": "Breaks up long streaks of bad rolls so that the RNG feels less RNG",
-	"description": "After a run of bad results, the next d20 is corrected upward. Who it applies to, what counts as bad, how it corrects, whether it may crit, and how long a run has to be are all settings on this page. Turn it off with the Enabled switch; no restart needed.",
-	"tags": [
-		"Rules"
+	"compatible_game_version": [
+		"1.4.2",
+		"1.4.3"
 	],
-	"website_url": "",
+	"dependencies": [],
+	"description": "",
+	"image": "thumbnail.png",
+	"incompatibilities": [],
+	"load_before": [],
 	"mod_meta": {
 		"date_added": 0,
 		"date_updated": 0,
@@ -27,70 +22,15 @@
 		"user_id": 0,
 		"username": ""
 	},
-	"dependencies": [],
-	"incompatibilities": [],
+	"name": "LancerKarmaDice",
+	"namespace": "Reag",
 	"optional_dependencies": [],
-	"load_before": [],
-	"config_schema": {
-		"title": "Karmic Dice",
-		"description": "Changes take effect after Apply changes, at the start of the next combat. No restart needed.",
-		"type": "object",
-		"properties": {
-			"enabled": {
-				"type": "boolean",
-				"default": true,
-				"title": "Enabled",
-				"description": "Master switch. Off: every roll is vanilla."
-			},
-			"players_only": {
-				"type": "boolean",
-				"default": true,
-				"title": "Players only",
-				"description": "On: only your own mechs get karma. Off: everyone does, enemies included."
-			},
-			"outcome_aware": {
-				"type": "boolean",
-				"default": false,
-				"title": "Outcome-aware",
-				"description": "Off: a bad result is a low raw d20 (see Low roll threshold), on every d20 roll. On: a bad result is a MISSED ATTACK; saves and checks are ignored unless Mixed mode is on."
-			},
-			"mixed_mode": {
-				"type": "boolean",
-				"default": false,
-				"title": "Mixed mode",
-				"description": "Only matters when Outcome-aware is on: saves, checks and other non-attack d20s then use the low-roll rule and count toward the same run."
-			},
-			"reroll_mode": {
-				"type": "boolean",
-				"default": false,
-				"title": "Reroll instead of bonus",
-				"description": "Off: adds Strength to the die. On: rolls ONE extra d20 and keeps the higher (Strength is ignored)."
-			},
-			"allow_crits": {
-				"type": "boolean",
-				"default": false,
-				"title": "Allow karma crits",
-				"description": "Off: a corrected roll is capped at 19, so karma never manufactures a crit. On: it may reach 20."
-			},
-			"kick_in": {
-				"type": "number",
-				"default": 2,
-				"title": "Kick-in",
-				"description": "How many bad results in a row before karma corrects the next roll. 1 to 20."
-			},
-			"low_roll_threshold": {
-				"type": "number",
-				"default": 7,
-				"title": "Low roll threshold",
-				"description": "A raw d20 at or below this counts as bad (blind and mixed modes). 1 to 19."
-			},
-			"strength": {
-				"type": "number",
-				"default": 3,
-				"title": "Strength",
-				"description": "Bonus added to the d20 once karma is active. 1 to 19. Ignored in reroll mode."
-			}
-		}
-	},
-	"requires_restart": true
+	"requires_restart": true,
+	"summary": "Breaks up long streaks of bad rolls so that the RNG feels less RNG",
+	"tags": [
+		"Rules"
+	],
+	"title": "Karma Dice for Lancer",
+	"version_number": "1.0.0",
+	"website_url": ""
 }

@@ -20,3 +20,9 @@ func rerender(config:Dictionary, current_value = null) -> void:
 	if current_value == null and config.has('default'):
 		current_value = config.default
 	super(config, current_value)
+	# This mod's schema carries translation KEYS as title/description so the panel text lives in
+	# localization/localizations.csv. Godot's automatic control translation already turns a key into
+	# its text (vanilla relies on it for the 'editor.true' button label above), but be explicit so it
+	# does not depend on a tree setting. tr() of already-translated text is a no-op.
+	%Label.text = tr(%Label.text)
+	%Desc.text = tr(%Desc.text)

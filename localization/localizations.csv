@@ -1,3 +1,27 @@
 id,en
 mod.reag_lancerkarmadice.name,LancerKarmaDice
 reag_karmic_dice.corrected.log,Karmic dice nudged {unit} from a {raw} to a {corrected}.
+reag_karmic_dice.config.title,Karmic Dice
+reag_karmic_dice.config.description,"Changes take effect after Apply changes, at the start of the next combat. No restart needed."
+reag_karmic_dice.config.enabled.title,Enabled
+reag_karmic_dice.config.enabled.desc,Master switch.
+reag_karmic_dice.config.players_only.title,Players only
+reag_karmic_dice.config.players_only.desc,"On: only your own mechs get karma. 
+Off: everyone does, enemies included."
+reag_karmic_dice.config.outcome_aware.title,Outcome-aware
+reag_karmic_dice.config.outcome_aware.desc,"Off: a bad result is a low raw d20 (see Low roll threshold), on every d20 roll. 
+On: a bad result is a MISSED ATTACK; saves and checks are ignored unless Mixed mode is on."
+reag_karmic_dice.config.mixed_mode.title,Mixed mode
+reag_karmic_dice.config.mixed_mode.desc,"Only matters when Outcome-aware is on: saves, checks and other non-attack d20s then use the low-roll rule and count toward the same run."
+reag_karmic_dice.config.reroll_mode.title,Reroll instead of bonus
+reag_karmic_dice.config.reroll_mode.desc,"Off: adds Strength to the die. 
+On: rolls ONE extra d20 and keeps the higher (Strength is ignored)."
+reag_karmic_dice.config.allow_crits.title,Allow karma crits
+reag_karmic_dice.config.allow_crits.desc,"Off: a corrected roll is capped at 19, so karma never crits. 
+On: it may reach 20 and crit."
+reag_karmic_dice.config.kick_in.title,Kick-in
+reag_karmic_dice.config.kick_in.desc,How many bad results in a row before karma corrects the next roll. 1 to 20.
+reag_karmic_dice.config.low_roll_threshold.title,Low roll threshold
+reag_karmic_dice.config.low_roll_threshold.desc,A raw d20 at or below this counts as bad (blind and mixed modes). 1 to 19.
+reag_karmic_dice.config.strength.title,Strength
+reag_karmic_dice.config.strength.desc,Bonus added to the d20 once karma is active. 1 to 19. Ignored in reroll mode.

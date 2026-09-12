@@ -8,6 +8,7 @@ const MOD_LIBRARY_140 := 'res://engine/mod/mod_library.gd'
 ## Autoloads this mod extends with .gd_ext.gd files, by autoload name => vanilla script path.
 const EXTENDED_AUTOLOADS := {
 	&'Dice': 'res://engine/utils/dice.gd',
+	&'UnitHasecheck': 'res://engine/character/unit/service/unit_hasecheck.gd',
 }
 
 # Runs when this mod is activated (whenever active mods are changed)

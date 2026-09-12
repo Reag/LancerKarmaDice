@@ -110,15 +110,15 @@ static func classify(event:EventCore) -> KIND:
 	if event.context.object is AttackRoll: return KIND.ATTACK
 	return KIND.CHECK
 
-## Who actually rolled this die. For an attack it is context.unit. For a SAVE the engine puts the
-## FORCING unit in context.unit and the saver in context.target_unit (unit_hasecheck.gd
-## run_save_event, event_unit_save.gd:38-39), so the roller is target_unit. Plain and contested
-## checks (unit_hasecheck.gd make_check / handle_check) run on whatever event the caller had and
-## carry no roller at all; context.unit is the best available guess there and can be wrong.
-## Closing that gap needs a stash set by an override of UnitHasecheck.roll_check, a seam that must
-## be probed before it is trusted (CLAUDE.md, dead extension seams).
+## Who actually rolled this die. For an attack it is context.unit. For anything that went through
+## UnitHasecheck.roll_check (every save, check and contested check), unit_hasecheck.gd_ext.gd has
+## stashed the exact roller in rolling_unit, which is authoritative. The two fallbacks below only
+## matter if that extension is not live: a SAVE event names the FORCING unit in context.unit and the
+## saver in context.target_unit (unit_hasecheck.gd run_save_event, event_unit_save.gd:38-39); a
+## plain or contested check runs on whatever event the caller had, so context.unit is a guess.
 static func roller(event:EventCore, kind:KIND) -> Unit:
 	var context:Context = event.context
+	if kind != KIND.ATTACK and Unit.is_valid(rolling_unit): return rolling_unit
 	if kind != KIND.ATTACK and is_save_event(event) and Unit.is_valid(context.target_unit):
 		return context.target_unit
 	return context.unit
@@ -143,7 +143,9 @@ static func apply(raw:int, event:EventCore) -> int:
 
 	if not config.enabled: return raw
 	if config.players_only:
-		if not Unit.is_valid(unit) or unit.get_faction() != Faction.PLAYER: return raw
+		if not Unit.is_valid(unit) or unit.get_faction() != Faction.PLAYER:
+			declined += 1
+			return raw
 	var grader:GRADER = policy.get(kind, GRADER.EXCLUDED)
 	if grader == GRADER.EXCLUDED: return raw
 
