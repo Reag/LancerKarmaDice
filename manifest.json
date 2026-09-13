@@ -74,12 +74,12 @@
 	"load_before": [],
 	"mod_meta": {
 		"date_added": 1789240800,
-		"date_updated": 1789240800,
-		"file_id": 8206491,
+		"date_updated": 1789240808,
+		"file_id": 8207091,
 		"game_version": "1.4.3",
 		"modio_id": 6378829,
 		"name_id": "dgco-reag",
-		"revision": 1,
+		"revision": 2,
 		"user_id": 61561194,
 		"username": "Mr_Reag"
 	},
