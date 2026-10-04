@@ -75,12 +75,12 @@
 	"load_before": [],
 	"mod_meta": {
 		"date_added": 1789240800,
-		"date_updated": 1789248593,
-		"file_id": 8208971,
+		"date_updated": 1789283586,
+		"file_id": 8283123,
 		"game_version": "1.4.3",
 		"modio_id": 6378829,
 		"name_id": "dgco-reag",
-		"revision": 3,
+		"revision": 4,
 		"user_id": 61561194,
 		"username": "Mr_Reag"
 	},
@@ -93,6 +93,6 @@
 		"Rules"
 	],
 	"title": "Karma Dice for Lancer",
-	"version_number": "1.0.0",
+	"version_number": "1.0.1",
 	"website_url": ""
 }
